@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Harold's Grade Calculator</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #400c63, #583434); /* Soft cyan gradient */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            color: #c2c2d4;
+            position: relative;
+            overflow: hidden;
+        }
+        .container {
+            background-color: #b1afcace;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 50px 100px rgba(70, 4, 133, 0.637);
+            width: 350px;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+            transition: transform 0.3s ease; /* Add smooth transition on hover */
+        }
+        .container:hover {
+            transform: scale(1.05);
+        }
+        .side-decoration {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 50px;
+            z-index: 0;
+        }
+        .left-side {
+            left: -50px;
+            background: linear-gradient(to bottom, #14194b, #121b1a);
+            clip-path: polygon(0 0, 100% 10%, 100% 100%, 0 90%);
+        }
+        .right-side {
+            right: -50px;
+            background: linear-gradient(to bottom, #464953, #002523);
+            clip-path: polygon(0 0, 100% 10%, 100% 100%, 0 90%);
+        }
+        h1 {
+            margin-bottom: 20px;
+            color: #000000; /* Teal color */
+            font-size: 30px;
+            font-weight: bold;
+        }
+        form {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 10px;
+            color: #000000;
+            font-size: 18px;
+        }
+        input[type="text"] {
+            width: calc(100% - 24px);
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #030101;
+            border-radius: 6px;
+            font-size: 16px;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Added box-shadow transition */
+        }
+        input[type="text"]:focus {
+            border-color: #030101; /* Teal color */
+            outline: none;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.5); /* Add a shadow for focus effect */
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #10a553; /* Teal color */
+            color: #ffffff;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: background-color 0.3s ease, transform 0.3s ease; /* Unified timing */
+        }
+        button:hover {
+            background-color: #9b7272; /* Darker teal */
+            transform: translateY(-2px);
+        }
+        .flashes {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .flashes li {
+            padding: 12px;
+            background-color: #d4edda;
+            color: #0d071a;
+            border: 1px solid #c3e6cb;
+            border-radius: 6px;
+            margin-bottom: 15px;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+        .flashes li:hover {
+            background-color: #83a0a5; /* Light hover effect */
+        }
+    </style>
+</head>
+<body>
+    <div class="side-decoration left-side"></div>
+    <div class="side-decoration right-side"></div>
+    <div class="container">
+        <h1>Grade Calculator</h1>
+        <form method="post">
+            <label for="prelim_grade">Enter your Prelim grade:</label>
+            <input type="text" id="prelim_grade" name="prelim_grade" required>
+            <button type="submit">Calculate</button>
+        </form>
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <ul class="flashes">
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+    </div>
+</body>
+</html>
